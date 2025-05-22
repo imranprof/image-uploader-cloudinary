@@ -9,9 +9,9 @@ def image_upload(request):
     if form.is_valid():
       form.save()
       return redirect('image_list')
-    else:
-      form = ImageForm()
-    return render(request, 'gallery/upload.html', {'form': form})
+  else:
+    form = ImageForm()
+  return render(request, 'gallery/upload.html', {'form': form})
 
 def image_list(request):
   images = Image.objects.all()
