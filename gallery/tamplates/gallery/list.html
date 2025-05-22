@@ -1,0 +1,7 @@
+<h2>Uploaded Images</h2>
+{% for img in images %}
+  <div>
+    <h3>{{ img.title }}</h3>
+    <img src="{{ img.image.url }}" width="300" />
+  </div>
+{% endfor %}
