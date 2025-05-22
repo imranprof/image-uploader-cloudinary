@@ -86,6 +86,15 @@ DATABASES = {
     }
 }
 
+# Cloudinary settings
+CLOUDINARY_STORAGE = {
+    'CLOUD_NAME': 'dbzd4jzfe',
+    'API_KEY': '655337589343629',
+    'API_SECRET': 'c0lcHCpZuFslHqJy-ORajlKmBf0',
+}
+DEFAULT_FILE_STORAGE = 'cloudinary_storage.storage.MediaCloudinaryStorage'
+
+
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
