@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .models import Image
 from .forms import ImageForm
+import cloudinary.uploader
 
 def image_upload(request):
     if request.method == 'POST':
@@ -20,6 +21,11 @@ def image_list(request):
 def delete_image(request, image_id):
     image = get_object_or_404(Image, id=image_id)
     if request.method == 'POST':
+        # Delete from Cloudinary
+        if image.image:
+            public_id = image.image.name.split('.')[0]  # remove extension
+            cloudinary.uploader.destroy(public_id)
+
         image.delete()
-        return redirect('image_list')  # Make sure this name matches your URL name for the list page
+        return redirect('image_list')
     return redirect('image_list')
