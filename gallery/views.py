@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from .models import Image
 from .forms import ImageForm
 
@@ -16,3 +16,10 @@ def image_upload(request):
 def image_list(request):
     images = Image.objects.all()
     return render(request, 'gallery/list.html', {'images': images})
+
+def delete_image(request, image_id):
+    image = get_object_or_404(Image, id=image_id)
+    if request.method == 'POST':
+        image.delete()
+        return redirect('image_list')  # Make sure this name matches your URL name for the list page
+    return redirect('image_list')

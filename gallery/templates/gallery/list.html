@@ -1,7 +1,32 @@
 <h2>Uploaded Images</h2>
-{% for img in images %}
-  <div>
-    <h3>{{ img.title }}</h3>
-    <img src="{{ img.image.url }}" width="300" />
-  </div>
-{% endfor %}
+
+<div style="
+  display: grid; 
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); 
+  gap: 20px;
+  align-items: start;
+">
+  {% for img in images %}
+    <div style="
+      border: 1px solid #ddd; 
+      padding: 10px; 
+      border-radius: 8px; 
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      text-align: center;
+    ">
+      <h3>{{ img.title }}</h3>
+      <img src="{{ img.image.url }}" width="300" style="max-width: 100%; height: auto; border-radius: 5px;" />
+      <form action="{% url 'delete_image' img.id %}" method="post" style="margin-top: 10px;">
+        {% csrf_token %}
+        <button type="submit" style="
+          background-color: #e74c3c; 
+          color: white; 
+          border: none; 
+          padding: 6px 12px; 
+          border-radius: 4px; 
+          cursor: pointer;
+        ">Delete</button>
+      </form>
+    </div>
+  {% endfor %}
+</div>
